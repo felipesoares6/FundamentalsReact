@@ -19,7 +19,6 @@ class App extends React.Component {
         <h1 className=""> Hello React World { this.props.cat } </h1>
         <h2> Egg Head { this.state.txt } </h2>
         <Widget update={ this._update.bind(this) } />
-        <Widget update={ this._update.bind(this) } />
       </div>
     )
   }
@@ -27,6 +26,8 @@ class App extends React.Component {
 
 const Widget = (props) =>
   <input type="text" onChange={ props.update } />
+
+
 
 
 //validate data
