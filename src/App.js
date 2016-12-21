@@ -16,13 +16,18 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <input type="text" onChange={ this._update.bind(this) } />
-        <h1 className="">Hello React World</h1>
-        <h2> Egg Head { this.state.txt } { this.props.cat } </h2>
+        <h1 className=""> Hello React World { this.props.cat } </h1>
+        <h2> Egg Head { this.state.txt } </h2>
+        <Widget update={ this._update.bind(this) } />
+        <Widget update={ this._update.bind(this) } />
       </div>
     )
   }
 }
+
+const Widget = (props) =>
+  <input type="text" onChange={ props.update } />
+
 
 //validate data
 App.propTypes = {
@@ -36,4 +41,5 @@ App.defaultProps = {
 }
 
 // const App = () => <h1> React Top Component </h1>
+
 export default App
