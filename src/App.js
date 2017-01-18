@@ -1,46 +1,57 @@
-import React from 'react'
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor () {
-    super()
-
-    this.state = {
-      txt: 'state text top'
-    }
+    super();
+    this.state = { val:0 };
+    this.update = this.update.bind(this);
   }
 
-  _update (e) {
-    this.setState({ txt: e.target.value })
+  update () {
+    this.setState({ val: this.state.val + 1 });
+  }
+
+  componentWillMount () {
+    console.log('componentWillMount');
+  }
+
+  componentDidMount () {
+    console.log('componentDidMount');
+  }
+
+  componentWillUnmount () {
+    console.log('componentWillUnMount');
+  }
+
+  render () {
+    console.log('render');
+    return (
+      <button onClick={this.update}>
+        { this.state.val }
+      </button>
+    )
+  }
+}
+
+class Wrapper extends React.Component {
+  mount () {
+    ReactDOM.render(<App/>, document.getElementById('a'));
+  }
+
+  unmount () {
+    ReactDOM.unmountComponentAtNode(document.getElementById('a'));
   }
 
   render () {
     return (
       <div>
-        <h1 className=""> Hello React World { this.props.cat } </h1>
-        <h2> Egg Head { this.state.txt } </h2>
-        <Widget update={ this._update.bind(this) } />
+        <button onClick={this.mount.bind(this)}>Mount</button>
+        <button onClick={this.unmount.bind(this)}>UnMount</button>
+        <div id='a'></div>
       </div>
     )
   }
 }
 
-const Widget = (props) =>
-  <input type="text" onChange={ props.update } />
-
-
-
-
-//validate data
-App.propTypes = {
-  txt: React.PropTypes.string,
-  cat: React.PropTypes.number.isRequired
-}
-
-//default props
-App.defaultProps = {
-  txt: 'this is the default txt'
-}
-
-// const App = () => <h1> React Top Component </h1>
-
-export default App
+export default Wrapper
